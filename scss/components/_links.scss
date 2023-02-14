@@ -1,0 +1,10 @@
+body {
+  a {
+    color: $secondary-color;
+    text-decoration: none;
+  }
+  a:hover {
+    color: $tertiary-color;
+    transition-duration: 0.3s;
+  }
+}

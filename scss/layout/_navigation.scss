@@ -1,0 +1,24 @@
+header {
+  nav {
+    background-color: $primary-color;
+    justify-content: center !important;
+
+    a {
+      font-weight: 500 !important;
+      text-transform: uppercase;
+      color: #000 !important;
+    }
+    a:hover,
+    a:active {
+      font-weight: 700 !important;
+    }
+  }
+}
+
+.navbar > .container {
+  justify-content: center !important;
+}
+
+.breadcrumb {
+  padding: 20px 0px 0px 10px;
+}

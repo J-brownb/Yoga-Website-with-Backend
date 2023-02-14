@@ -1,0 +1,44 @@
+@media only screen and (max-width: 1000px) {
+  body {
+    .banner {
+      height: 275px;
+    }
+    .banner:before {
+      height: 200px;
+    }
+  }
+}
+
+.banner {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  background-color: $secondary-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .bannercontent {
+    position: relative;
+    max-width: 900px;
+    text-align: center;
+
+    h1,
+    p {
+      color: white;
+      margin: 10px;
+      padding: 0;
+    }
+  }
+}
+
+.banner:before {
+  content: " ";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  background: #fff;
+  clip-path: polygon(100% 60%, 0 100%, 100% 100%);
+}

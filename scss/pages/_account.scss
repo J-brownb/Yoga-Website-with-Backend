@@ -1,0 +1,15 @@
+.account_options {
+  .col {
+    background-color: $tertiary-color;
+    padding: 50px;
+    margin: 10px;
+    text-align: center;
+    border-radius: 2%;
+  }
+
+  i {
+    font-size: 40px;
+    color: $secondary-color;
+    margin: 10px;
+  }
+}
