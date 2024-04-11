@@ -5,10 +5,10 @@ error_reporting(E_ALL & ~E_NOTICE);
 require_once(__DIR__ . '/includes/boot.include.php');
 
 if ($_GET['p']) {
-  $secure_pages = array('account', 'changepassword');
+  $secure_pages = array('account', 'changepassword', 'add', 'account-details', 'your-favourites', 'your-routines', 'your-poses', 'your reviews');
   if (in_array($_GET['p'], $secure_pages)) {
     if (!$_SESSION['is_loggedin']) {
-      header("Location: index.php?p=login");
+      header("Location: /awad-assignment/login");
       exit();
     }
   }

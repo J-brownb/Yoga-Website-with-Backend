@@ -3,12 +3,12 @@
   <div class="banner">
     <div class="bannercontent pb-5">
       <h1>Yoga Categories</h1>
-      <p>Browse yoga poses from different categories depending on your goals.</p>
+      <p>Browse yoga poses from different categories depending on your goals</p>
     </div>
   </div>
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/awad-assignment/index.php">Home</a></li>
+      <li class="breadcrumb-item"><a href="/awad-assignment/">Home</a></li>
       <li class="breadcrumb-item active" aria-current="page">Yoga Categories</li>
     </ol>
   </nav>
@@ -22,12 +22,13 @@
   <div class="container">
     <div class="row centre">
       {foreach from=$categories item=category}
-      <div class="col-lg-3 results">
-        <img src="./user_images/categories/{$category.cat_image}" width="200" height="200">
-        <br>
-        <h3>{$category.cat_name}</h3>
-        <p>{$category.cat_desc}</p>
-        <a href='index.php?p=yoga-categories&id={$category.cat_id}'> <button>View all Poses</button></a>
+        <div class="col-lg-3 results">
+          <div class="poseimage" style="background-image: url(./user-images/categories/{$category.cat_image});">
+          </div>
+          <br>
+          <h3>{$category.cat_name}</h3>
+          <p class="m-3">{$category.cat_desc}</p>
+          <a href='/awad-assignment/categories/{$category.cat_slug}'> <button>View all Poses</button></a>
         </div>
       {/foreach}
     </div>

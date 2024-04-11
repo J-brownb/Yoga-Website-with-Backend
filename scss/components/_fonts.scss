@@ -25,3 +25,17 @@ h3 {
   font-weight: 400;
   color: $secondary-color;
 }
+
+.bigP {
+  font-size: 3rem;
+}
+
+.quote {
+  font-family: "Handlee", cursive;
+  font-size: 2rem;
+}
+
+.quotebox {
+  border: 1px solid $secondary-color;
+  border-radius: 5px;
+}

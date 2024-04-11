@@ -3,13 +3,13 @@
     <div class="banner">
         <div class="bannercontent pb-5">
             <h1>Change Password</h1>
-            <p>Update your password here.</p>
+            <p>Update your password here</p>
         </div>
     </div>
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/awad-assignment/index.php">Home</a></li>
-            <li class="breadcrumb-item"><a href="/awad-assignment/index.php?p=account">My Account</a></li>
+            <li class="breadcrumb-item"><a href="/awad-assignment/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/awad-assignment/account">My Account</a></li>
             <li class="breadcrumb-item active" aria-current="page">Change Password</li>
         </ol>
     </nav>
@@ -25,17 +25,16 @@
                     {$success}
                 </div>
             {/if}
-            <form action="" method="post">
+            <form method="post">
                 <div class="mb-3">
                     <label for="currentPassword">Current Password</label>
-                    <input type="password" class="form-control" id="currentPassword" name="currentPassword">
+                    <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
                 </div>
                 <div class="mb-3">
-
                     <label for="newPassword">New Password</label>
-                    <input type="password" class="form-control" id="newPassword" name="newPassword">
+                    <input type="password" class="form-control" id="newPassword" name="newPassword" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Change password</button>
+                <button type="submit" name="changePass" class="btn btn-primary">Change password</button>
             </form>
         </div>
     </div>

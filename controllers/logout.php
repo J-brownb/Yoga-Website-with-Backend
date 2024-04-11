@@ -1,4 +1,4 @@
 <?php
 $_SESSION = array();
 session_destroy();
-header("Location: index.php?p=login");
+header("Location: /awad-assignment/login");

@@ -1,155 +1,273 @@
 {extends file="layouts/main.tpl"}
-{block name ="body"}
-  <div class="hero">
-    <div class="container pb-5 ">
-      <div class="row searchArea">
-        <div class="col-8 pt-5">
-          <h1 class="homeh1">
-            Start your<span class="highlight">yoga<br />journey</span>today
-          </h1> <br />
-          <form action="/results.html">
-            <input class="form-control me-2" id="searching" type="search" placeholder="Search yoga poses.." aria-
-              label="Search" onfocus="this.value=''" />
-            <br />
-            <button id="exerciseSearchBtn" type="submit">
-              Search <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="container">
-    <h2 class="text-center">Featured Yoga Poses</h2>
-    <p class="text-center pb-3">Take a look at a selection of handpicked yoga poses for you to try.</p>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg results">
-        <img src="/images/Boat Pose.png" alt="yoga boat pose" width="200" height="200">
-        <br>
-        <p><strong>English Name:</strong> Boat</p>
-        <p><strong>Sanskrit Name:</strong> <i>Navasana</i></p>
-        <p><strong>Difficulty:</strong>⭐</p>
-      </div>
-      <div class="col-lg results">
-        <img src="/images/Half Boat (1).png" alt="yoga half boat pose" width="200" height="200">
-        <br>
-        <p><strong>English Name:</strong> Half-Boat</p>
-        <p><strong>Sanskrit Name:</strong> <i>Ardha Navasana</i></p>
-        <p><strong>Difficulty:</strong>⭐⭐</p>
-      </div>
-      <div class="col-lg results">
-        <img src="/images/Forward Bend (1).png" alt="yoga forward bend pose" width="200" height="200">
-        <br>
-        <p><strong>English Name:</strong> Forward Bend</p>
-        <p><strong>Sanskrit Name:</strong> <i>Uttanasana</i></p>
-        <p><strong>Difficulty:</strong>⭐⭐⭐</p>
+{block name="body"}
+    {if $user_data}
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="container-fluid">
+                        <a class="navbar-brand pt-3" href="#"> <img src="./images/Moneywise logo.png" width="300"
+                                height="100"></a>
+                        <div class="dropdown user-menu">
+                            <a href="#"
+                                class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                                <strong>{$user_data['user_first_name']}</strong>
+                            </a>
+                            <ul class="dropdown-menu text-small shadow">
+                                <li><a class="dropdown-item" href="/Dissertation/settings">Settings</a></li>
+                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="/Dissertation/logout">Sign out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <!-- Sidebar Nav -->
+                <div class="col-md-3 col-lg-2 d-md-block p-0 bg-body-tertiary">
+                    <div class="d-flex flex-column flex-shrink-0 p-3">
+                        <ul class="nav nav-pills flex-column mb-auto mt-3">
+                            <li class="nav-item">
+                                <a href="/Dissertation/" class="nav-link active" aria-current="page">
+                                    <i class="fas fa-home me-2"></i>
+                                    Home
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Dissertation/budgeting-tool" class="nav-link link-body-emphasis">
+                                    <i class="fa-solid fa-wallet"></i>
+                                    Budgeting
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Dissertation/stock-viewer" class="nav-link link-body-emphasis">
+                                    <i class="fa-solid fa-chart-line"></i>
+                                    Stocks
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Dissertation/finances" class="nav-link link-body-emphasis">
+                                    <i class="fa-solid fa-chart-pie"></i>
+                                    Finances
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Dissertation/financial-academy" class="nav-link link-body-emphasis">
+                                    <i class="fa-solid fa-book"></i>
+                                    Academy
+                                </a>
+                            </li>
+                        </ul>
+                        <hr>
+                    </div>
+                </div>
+                <main class="pt-5 col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                    <div class="container">
+                        <div class="row pb-5">
+                            <div class="col text-center">
+                                <h1>Welcome, {$user_data['user_first_name']}</h1>
+                            </div>
+                        </div>
+                    <div class="row text-center ">
+                        {if $financesData}
+                        <h2>Here's how your finances are looking..</h2>
+                <div class="col detail-box">
+                    <h3>Total funds</h3>
+                    <p>£{$financesData[0]['savings_current_account'] + $financesData[0]['savings_account1'] + {$financesData[0]['savings_investments']}
+                        + $financesData[0]['savings_account2']+ $financesData[0]['savings_account3']+
+                        $financesData[0]['savings_investments']+ $financesData[0]['savings_other']}
+                    </p>
+                </div>
+                <div class="col detail-box">
+                    <h3>Fund breakdown</h3>
+                    <div>
+                        <canvas id="pie-chart"></canvas>
+                    </div>
+                </div>
+                <div class="col detail-box">
+                    <h3>Next payday</h3>
+                </div>
+                {else}
+                <div class="col detail-box pt-5 pb-5">
+                    <h2>There's nothing here yet 😭</h2>
+                                <p>Get started by <a href="/Dissertation/budgeting-tool">updating your budget</a> and <a
+                                        href="/Dissertation/finances">submitting your finances!</a></p>
+                            </div>
+                        {/if}
+                    </div>
+                    <div class="section row pt-5 pb-5 text-center">
+                        <h2>Take the next step in your financial journey</h2>
+                        <div class="col detail-box">
+                            <h3> <i class="fa-solid fa-book"></i> Take a lesson</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, quisque imperdiet tincidunt nibh.</p>
+                            <a href="/Dissertation/financial-academy"><button class="primary-button">Join Today</button></a>
+                        </div>
+                        <div class="col detail-box">
+                            <h3><i class="fa-solid fa-chart-pie"></i> Update your finances</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, quisque imperdiet tincidunt nibh.</p>
+                            <a href="/Dissertation/financial-academy"><button class="primary-button">Join Today</button></a>
+                        </div>
+                        <div class="col detail-box">
+                            <h3><i class="fa-solid fa-chart-line"></i> Search stocks</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, quisque imperdiet tincidunt nibh.</p>
+                            <a href="/Dissertation/financial-academy"><button class="primary-button">Join Today</button></a>
+                        </div>
+                    </div>                    </div>
 
-      </div>
-    </div>
-    <div class="row pb-5">
-      <div class="col-lg results">
-        <img src="/images/Downward Facing Dog (1).png" alt="yoga downward facing dog pose" width="200" height="200">
-        <br>
-        <p><strong>English Name:</strong> Downward-Facing Dog</p>
-        <p><strong>Sanskrit Name:</strong> <i>Adho Mukha Svanasana</i></p>
-        <p><strong>Difficulty:</strong>⭐⭐</p>
-      </div>
-      <div class="col-lg results">
-        <img src="/images/Childs Pose (1).png" alt="yoga child's pose" width="200" height="200">
-        <br>
-        <p><strong>English Name:</strong> Child's Pose</p>
-      <p><strong>Sanskrit Name:</strong> <i>Balasana</i></p>
-      <p><strong>Difficulty:</strong>⭐⭐</p>
-    </div>
-    <div class="col-lg results">
-      <img src="/images/Dolphin (1).png" alt="yoga dolphin pose" width="200" height="200">
-      <br>
-      <p><strong>English Name:</strong> Dolphin</p>
-      <p><strong>Sanskrit Name:</strong> <i>Ardha Pincha</i></p>
-      <p><strong>Difficulty:</strong>⭐⭐</p>
-    </div>
-  </div>
-</div>
-<div class="container text-center">
-  <h2 class="pb-2">Why Try Yoga?</h2>
-  <p class="pb-2">Yoga offers many health benefits including increased flexiblity, muscle strength, better balance and
-    improved athletic performance.</p>
-</div>
-<div class="benefits">
-  <div class="container pt-5 pb-5">
-    <div class="row text-center">
-      <div class="col-sm">
-        <i class="fa-solid fa-heart-pulse"></i>
-        <h3><strong>Better Health</strong></h3>
-        <p>Yoga offers many health benefits including increased flexiblity, muscle strength, better balance and improved
-          athletic performance.</p>
-      </div>
-      <div class="col-sm">
-        <i class="fa-solid fa-face-smile"></i>
-        <h3><strong>Improved Mood</strong></h3>
-        <p>As well as physical health, yoga has many benefits to your overall mental wellbeing and can help relieve
-          stress and make you happier.</p>
-      </div>
-      <div class="col-sm">
-        <i class="fa-solid fa-person-walking"></i>
-        <h3><strong>Get Active</strong></h3>
-        <p>Yoga is a great exercise that you can do from the comfort of your home. You do not need any equipment but a
-          yoga mat is reccomended.</p>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="container imgborders pt-5 pb-5">
-  <div class="row pt-5 pb-5">
-    <div class="col-md">
-      <h2>Categories of Yoga</h2>
-      <p>
-        Whether you are an experienced yogi or just getting started with a few poses, yoga is for everyone. Yoga offers
-        so many benefits including better flexibility, protection from injury, losing weight and improving your overall
-        athletic performance. Yoga has also been proven to reduce stress and help decrease anxiety.
-      </p>
-      <p>
-        Within our database, we have several different categories of yoga to ensure you get the full benefit. From core
-        yoga poses to chest opening yoga poses, having a well rounded routine will maximise the effectiveness of yoga on
-        your overall mental and physical health.
-      </p>
-      <a href='/awad-assignment/index.php?p=yoga-categories'> <button>View all yoga categories</button></a>
-    </div>
-    <div class="col-md imgborderright">
-      <img src="/images/woman-stretching.jpg" class="mx-auto d-block" alt="woman doing yoga pose on a mat inside" />
-    </div>
-  </div>
-</div>
-<div class="cream pt-3 pb-3">
-  <div class="container">
-    <div class="row pt-5 pb-5 reverseflex">
-      <div class="col-md imgborderleft">
-        <img src="/images/man doing yoga.png" class="mx-auto d-block" alt="woman doing yoga pose on a mat inside" />
-      </div>
-      <div class="col-md">
-        <h2>Core Yoga Poses</h2>
-        <p>
-          You might think the only way to strengthen your core muscles is at the gym or by doing strenuous exercise, but
-          yoga can be a great way to work muscles such as your abs and back in a fluid and meditative way which you can
-          do from the comfort of your own home.
-        </p>
-        <p>
-          Core yoga poses are designing to help engage your abdominal poses and build a strong and stable centre. Poses
-          which fall under the core category include boat pose, dophin pose and side plank pose.
-        </p>
-        <a href='/awad-assignment/index.php?p=core-yoga-poses'> <button>View core yoga poses</button></a>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="studios text-center container pt-5 pb-5">
-  <h2>Find a Studio</h2>
-  <p>
-    Are you looking to get into yoga? Our dedicated page features an interactive map and shows yoga studios in your
-    local area, with useful information such as the name, address and rating of the studio.
-  </p>
-  <a href='/find-a-studio.html'> <button>Find Local Studios</button></a>
-  </div>
+                </main>
+            {else}
+                <div class="alternate-bg changing-text">
+                    <div class="container pt-5 pb-5">
+                        <div class="row pt-5 pb-5">
+                            <div class="col pb-5">
+                                <h1 class="title underlined-header">Take control of your <span>finances</span></h1>
+                                <p class="pt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque imperdiet
+                                    tincidunt nibh, ac tincidunt augue consectetur id. Nulla convallis scelerisque turpis eu
+                                    venenatis. Proin tempus ante velleoconsectetur, vitae egestas sem aliquet. </p>
+                                <a href="/Dissertation/register"><button class="secondary-button">Join Today</button></a>
+
+                            </div>
+                            <div class="col">
+                                <img src="https://placehold.co/600x400">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container pt-5 pb-5 section">
+                    <div class="row pt-3">
+                        <div class="col">
+                            <h2 id="features">Features</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, quisque imperdiet tincidunt nibh.</p>
+                        </div>
+                    </div>
+                    <div class="row pt-5">
+                        <div class="col">
+                            <h3>Feature <i class="fa-solid fa-wallet"></i></h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, quisque imperdiet tincidunt nibh.</p>
+                        </div>
+                        <div class="col">
+                            <h3>Feature <i class="fa-solid fa-wallet"></i></h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, quisque imperdiet tincidunt nibh.</p>
+                        </div>
+                    </div>
+                    <div class="row pb-5">
+                        <div class="col">
+                            <h3>Feature <i class="fa-solid fa-wallet"></i></h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, quisque imperdiet tincidunt nibh.</p>
+                        </div>
+                        <div class="col">
+                            <h3>Feature <i class="fa-solid fa-wallet"></i></h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, quisque imperdiet tincidunt nibh.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="alternate-bg">
+                    <div class="container pt-5 pb-5 section">
+                        <div class="row pt-5 pb-5">
+                            <div class="col">
+                                <img src="https://placehold.co/600x300">
+                            </div>
+                            <div class="col">
+                                <h2 id="about">About</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque imperdiet tincidunt nibh, ac
+                                    tincidunt augue consectetur id. Nulla convallis scelerisque turpis eu venenatis. Proin
+                                    tempus ante vel leo consectetur, vitae egestas sem aliquet. </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container pt-5 pb-5 section">
+                    <div class="row pt-3">
+                        <div class="col">
+                            <h2 id="benefits">Benefits</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, quisque imperdiet tincidunt nibh.</p>
+                        </div>
+                        <div class="row pt-5">
+                            <div class="col text-center">
+                                <h3>Benefit</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            </div>
+                            <div class="col text-center">
+                                <h3>Benefit</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            </div>
+                            <div class="col text-center">
+                                <h3>Benefit</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            </div>
+                            <div class="col text-center">
+                                <h3>Benefit</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            </div>
+                        </div>
+                        <div class="row pb-5">
+                            <div class="col text-center">
+                                <h3>Benefit</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            </div>
+                            <div class="col text-center">
+                                <h3>Benefit</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            </div>
+                            <div class="col text-center">
+                                <h3>Benefit</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            </div>
+                            <div class="col text-center">
+                                <h3>Benefit</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="alternate-bg section">
+                    <div class="container pt-5 pb-5">
+                        <div class="row">
+                            <div class="col-10">
+                                <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br> Quisque imperdiet tincidunt
+                                    nibh,
+                                    ac
+                                    tincidunt augue consectetur id. </h2>
+                            </div>
+                            <div class="col pt-3">
+                                <a href="/Dissertation/register"><button class="secondary-button">Sign Up</button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {/if}
+            <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+            <script>
+                const savingsInvestments = {$financesData[0]['savings_investments']};
+                const savingsCurrentAccount = {$financesData[0]['savings_current_account']};
+                const savingsAccount = {$financesData[0]['savings_account1'] + $financesData[0]['savings_account2']+ $financesData[0]['savings_account3'] + $financesData[0]['savings_other']};
+
+                const data = {
+                    labels: ['Savings', 'Investments', 'Current Account'],
+                    datasets: [{
+                        label: 'My First Dataset',
+                        data: [savingsAccount, savingsInvestments, savingsCurrentAccount],
+                        backgroundColor: ['#023045', '#cdff1a', '#74526c'],
+                        hoverOffset: 4,
+                    }],
+                };
+
+                const options = {
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                    },
+                };
+
+                const chartConfig = {
+                    type: 'pie',
+                    data: data,
+                    options: options,
+                };
+
+                new Chart(document.getElementById("pie-chart"), chartConfig);
+            </script>
 {/block}

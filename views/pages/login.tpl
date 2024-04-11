@@ -1,72 +1,30 @@
 {extends file="layouts/main.tpl"}
-{block name ="body"}
-  <div class="banner">
-    <div class="bannercontent pb-5">
-      <h1>Login or Register</h1>
-      <p>Login or create an account to save poses to your routine.</p>
-    </div>
-  </div>
-  <div class="container pb-5">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/awad-assignment/index.php">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Login</li>
-      </ol>
-    </nav>
-    {if $error}
-      <div class="alert alert-danger" role="alert">
-        {$error}
-      </div>
-    {/if}
-    {if $success}
-      <div class="alert alert-success" role="alert">
-        {$success}
-      </div>
-    {/if}
-    <div class="container pt-5">
-      <div class="row">
-        <div class="col-sm">
-          <h2>Login to Your Account</h2>
-          <form id="login-form" method="post" action="">
-            <div class="mb-3">
-              <label class="form-label" for="login_email">Email address</label>
-              <input type="email" class="form-control" id="login_email" name="email" />
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="login_password">Password</label>
-              <input type="password" class="form-control" id="login_password" name="password" />
-            </div>
-            <button type="submit" name="login" value="1" class="btn btn-primary">Login</button>
-        </div>
-        </form>
-        <div class="col-sm">
-          <h2>Register for an Account</h2>
-          <form id="registration-form" method="post" action="">
-            <div class="mb-3">
-              <label class="form-label" for="name">First Name</label>
-              <input type="text" class="form-control" id="name" name="name" />
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="surname">Last Name</label>
-              <input type="text" class="form-control" id="surname" name="surname" />
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="reg_email">Email address</label>
-              <input type="email" class="form-control" id="reg_email" name="email" />
-            </div>
+{block name="body"}
 
-            <div class="mb-3">
-              <label class="form-label" for="reg_password">Password</label>
-              <input type="password" class="form-control" id="reg_password" name="password" />
+    <div class="container pt-2 mt-2 text-center">
+        <div class="row">
+            <div class="col-sm">
+                <form method="post" action="" class="white-bg-form">
+                    <h1 class="pb-5">Login</h1>
+                    <div class="form-floating mb-3">
+                        <input type="email" required class="form-control" id="floatingInput" name="user_email"
+                            placeholder="name@example.com">
+                        <label class="opacity05" for="floatingInput"><i class="fa-solid fa-envelope"></i> Email</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" required class="form-control" id="floatingPassword" name="user_pass"
+                            placeholder="Password">
+                        <label class="opacity05" for="floatingPassword"><i class="fa-solid fa-key"></i> Password</label>
+                    </div>
+                    {if $error}
+                        <div class="alert alert-danger" role="alert">
+                            {$error}
+                        </div>
+                    {/if}
+                    <button type="submit" name="login" value="1" class="primary-button mt-3 mb-5">Login</button>
+                    <p>Don't have an account? Sign up <a href="/Dissertation/register">here</a></p>
+                </form>
             </div>
-            <div class="mb-3">
-              <label class="form-label" for="reg_password_confirm">Confirm Password</label>
-              <input type="password" class="form-control" id="reg_password_confirm" name="password_confirm" />
-            </div>
-            <button type="submit" name="register" value="1" class="btn btn-primary">Register</button>
-          </form>
         </div>
-      </div>
     </div>
-  </div>
 {/block}

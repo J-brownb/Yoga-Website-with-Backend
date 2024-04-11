@@ -8,20 +8,16 @@
 @import "layout/navigation";
 @import "layout/footer";
 // Components
-@import "components/benefits";
+@import "components/forms";
 @import "components/banner";
 @import "components/fonts";
 @import "components/buttons";
 @import "components/links";
 @import "components/images";
-
+@import "components/icons";
 // Pages
-@import "pages/individual";
 @import "pages/categoryitem";
 @import "pages/home";
-@import "pages/login";
 @import "pages/results";
 @import "pages/account";
-// Themes
-@import "themes/theme";
-//Results
+

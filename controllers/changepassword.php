@@ -1,21 +1,39 @@
 <?php
+//get category list for menu
+$Category = new Category($Conn);
+$categories = $Category->getAllCategories();
+$Smarty->assign('categories', $categories);
+
+//get user points if logged in 
+if ($_SESSION['is_loggedin']) {
+    $user_points = $User->getUserPoints();
+    $Smarty->assign('user_points', $user_points);
+};
+
+
+//Change password
 if ($_POST) {
-    if (!$_POST['currentPassword']) {
-        $error = "Current Password not set";
-    } else if (!$_POST['newPassword']) {
-        $error = "New Password not set";
+    $error = '';
+    if (isset($_POST["changePass"])) {
+        if (strlen($_POST["newPassword"]) < 8) {
+            $error = "Your new password must be at least 8 characters in length.";
+        } else {
+            $change_pass = $User->changeUserPassword($_POST['currentPassword'], $_POST['newPassword']);
+            if ($change_pass) {
+                $Smarty->assign('success', "Password has been updated.");
+            } else {
+                $error = "Something went wrong.";
+            }
+        }
     }
 
     if ($error) {
-        $smarty->assign('error', $error);
-    } else {
-        $change_pass = $User->changeUserPassword($_POST['currentPassword'], $_POST['newPassword']);
-        if ($change_pass) {
-            $Smarty->assign('success', "Password has been updated.");
-        } else {
-            $Smarty->assign('error', "Something went wrong.");
-        }
-
-
+        $Smarty->assign('error', $error);
     }
 }
+
+
+
+//getting moon phase for header
+require_once 'moon-phase.php';
+$Smarty->assign('today_moon_phase', $today_moon_phase);
