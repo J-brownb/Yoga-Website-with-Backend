@@ -38,7 +38,6 @@ if ($_POST) {
                 "text/html",
                 "<h1>Welcome to the Wellness Site</h1> <p>Your account has been created successfully.</p>"
             );
-            $sendgrid = new \SendGrid('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');
             $response = $sendgrid->send($email);
             $response = $sendgrid->send($email);
             if ($response->statusCode() == 202) {
